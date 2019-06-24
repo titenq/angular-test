@@ -1,0 +1,71 @@
+<div id="modalAddPost" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAddPostLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="progressoPost === 'pendente'">
+      <form [formGroup]="formPost" (ngSubmit)="postar()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAddPostLabel">Adicionar Post</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" placeholder="Título do Post" class="form-control mb-3" formControlName="titulo">
+          <textarea  rows="6" placeholder="Digite uma mensagem" class="form-control mb-3"
+                     formControlName="mensagem"></textarea>
+
+          <!--          <input type="file" class="form-control-file" accept="image/*" (change)="preparaImagemUpload($event)">-->
+
+          <div class='input-wrapper'>
+            <label for='input-file'>
+              Escolha uma Imagem
+            </label>
+            <input id="input-file" type="file" value="" accept="image/*"
+                   (change)="preparaImagemUpload($event);
+                             pegarNomeDaImagem($event)">
+            <span id='file-name'>{{ nomeDaImagem }}</span>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Post</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-content" *ngIf="progressoPost === 'andamento'">
+      <div class="modal-header">
+        <h5 class="modal-title">Publicação em Andamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="progress" style="height: 25px;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated"
+               role="progressbar"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="75"
+               [ngStyle]="{ 'width': porcentagemUpload + '%' }">{{ porcentagemUpload }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-content" *ngIf="progressoPost === 'concluido'">
+      <div  class="modal-content" aria-hidden="true">
+        <div class="modal-header">
+          <h5 class="modal-title">Postado</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Post Realizado com Sucesso!
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
