@@ -1,13 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core'
+import {FormControl, FormGroup} from '@angular/forms'
 
-import * as firebase from 'firebase/app';
-import 'firebase/app';
-import {interval, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {element} from 'protractor';
-import {ProgressoService} from '../../../services/progresso.service';
-import {DatabaseService} from '../../../services/database.service';
+import * as firebase from 'firebase/app'
+import 'firebase/app'
+import {interval, Subject} from 'rxjs'
+import {takeUntil} from 'rxjs/operators'
+import {ProgressoService} from '../../../services/progresso.service'
+import {DatabaseService} from '../../../services/database.service'
 
 @Component({
   selector: 'app-add-post',
@@ -30,6 +29,9 @@ export class AddPostComponent implements OnInit {
     'titulo': new FormControl(null),
     'mensagem': new FormControl(null)
   });
+
+  @Input() display: boolean
+  @Output() atualizaDisplay = new EventEmitter<boolean>()
 
   constructor(
     private databaseService: DatabaseService,
@@ -82,5 +84,14 @@ export class AddPostComponent implements OnInit {
 
   pegarNomeDaImagem(event: Event) {
     this.nomeDaImagem = (<HTMLInputElement>event.target).files[0].name
+  }
+
+  closeDialog() {
+    this.display = false
+  }
+
+  atualizaDialog() {
+    this.atualizaDisplay.emit(false)
+    this.closeDialog()
   }
 }

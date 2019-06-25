@@ -16,6 +16,8 @@ import {ProgressoService} from './services/progresso.service';
 import {AuthService} from './services/auth.service';
 import {DatabaseService} from './services/database.service';
 import {AuthGuard} from './guards/auth.guard';
+import {DialogModule} from 'primeng/dialog'
+import {ButtonModule} from 'primeng/button'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import {AuthGuard} from './guards/auth.guard';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule,
+    ButtonModule
   ],
   providers: [
     AuthService,

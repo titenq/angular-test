@@ -1,11 +1,13 @@
-<nav class="navbar fixed-top navbar-light bg-white">
+<nav class="navbar fixed-top navbar-light bg-white p-1">
   <div class="container">
     <div class="logo"></div>
     <div>
-      <div class="add-post" data-toggle="modal" data-target="#modalAddPost"></div>
-      <a href="#" (click)="logout()">
-        <button type="button" class="btn btn-link ml-3"><span class="text-uppercase">Sair</span></button>
-      </a>
+      <div class="add-post">
+        <img class="logo-instaclone" src="../../../assets/instaclone-logo.png" alt="" (click)="showDialog()">
+        <a href="#" (click)="logout()">
+          <button type="button" class="btn btn-link ml-3"><span class="text-uppercase">Sair</span></button>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
@@ -13,5 +15,6 @@
 <br><br><br>
 <div class="container">
   <app-posts #posts></app-posts>
-  <app-add-post (atualizarTimeline)="atualizarTimeline()"></app-add-post>
+  <app-add-post [display]="display" (atualizarTimeline)="atualizarTimeline()"
+  (atualizaDisplay)="recebeDisplay($event)"></app-add-post>
 </div>

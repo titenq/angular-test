@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core'
 
 import {AuthService} from '../../services/auth.service';
 
@@ -16,11 +16,22 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  display: boolean = false; //PrimeNG Dialog
+
   public logout(): void {
     this.authService.logout();
   }
 
   public atualizarTimeline(): void {
     this.posts.atualizarTimeline();
+  }
+
+  //PrimeNG Dialog
+  showDialog() {
+    this.display = true
+  }
+
+  recebeDisplay(novoDisplay) {
+    this.display = false
   }
 }
